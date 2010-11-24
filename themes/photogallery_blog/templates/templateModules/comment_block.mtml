@@ -1,0 +1,60 @@
+<MTComments><MTCommentsHeader><MTSetVar name="comment_order" value="0" /></MTCommentsHeader>
+<MTSetVar name="comment_order" op="++" /><MTCommentID setvar="comment_id" /><MTSetVar name="comment_orders[$comment_id]" value="$comment_order" />
+</MTComments>
+<MTSetVarTemplate name="Comment">
+<MTCommentID setvar="comment_id" />
+                    <dt id="comment<$MTVar name="comment_orders[$comment_id]"$>">
+                        <a href="#comment<$MTVar name="comment_orders[$comment_id]"$>" class="postno" title="Link to Comment <$MTVar name="comment_orders[$comment_id]"$>" id="comment-<$MTCommentID$>"><$MTVar name="comment_orders[$comment_id]"$>.</a>
+<mt:IfCommentParent>
+                        <em>On <$MTCommentDate language="en" format="%x"$>, <span class="vcard author"><$mt:CommentAuthorLink$></span> replied to a <a href="<mt:CommentParent><$mt:CommentLink$></mt:CommentParent>">comment from <mt:CommentParent><$mt:CommentAuthor$></mt:CommentParent></a> and wrote:</em>
+<mt:Else>
+                        <em>On <$MTCommentDate language="en" format="%x"$>, <span class="vcard author"><$mt:CommentAuthorLink$></span> wrote:</em>
+</mt:IfCommentParent>
+<mt:Unless name="comment_preview">
+                        <mt:IfCommentsAccepted> | <$mt:CommentReplyToLink text="Reply"$></mt:IfCommentsAccepted>
+</mt:Unless>
+                    </dt>
+                    <dd><$MTCommentBody$></dd>
+</MTSetVarTemplate>
+<!-- BEGIN #comments -->
+            <div id="comments">
+<MTComments>
+<MTCommentsHeader>
+                <dl class="commentlist">
+</MTCommentsHeader>
+<MTIfCommentParent><MTElse>
+                    <$MTVar name="comment"$>
+<MTCommentReplies>
+<MTCommentsHeader>
+                    <dd class="reply">
+                        <dl>
+</MTCommentsHeader>
+                    <$MTVar name="comment"$>
+<MTCommentRepliesRecurse>
+<MTCommentsFooter>
+                        </dl>
+                    </dd>
+</MTCommentsFooter>
+</MTCommentReplies>
+</MTIfCommentParent>
+<MTCommentsFooter>
+                </dl>
+</MTCommentsFooter>
+</MTComments>
+            </div>
+<!-- END #comments -->
+
+<MTIfCommentsActive>
+<mt:IfCommentsAccepted>
+<$MTSetVar name="static" value="1"$><$MTSetVar name="preview" value="0"$>
+                <p class="mainbutton" id="addcommentbutton"><a href="#addcomment" class="btn"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_add_a_comment.gif" alt="" width="116" height="21" /></a></p>
+<!-- BEGIN #addcomment -->
+                <div id="addcomment">
+                    <h2>Add a comment</h2>
+                    <$MTInclude module="Comment Fields"$>
+                </div>
+<!-- END #addcomment -->
+</mt:IfCommentsAccepted>
+<MTElse>
+                <p class="sub">Comments now closed for this photo.</p>
+</MTIfCommentsActive>

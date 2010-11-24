@@ -1,0 +1,40 @@
+<mt:If name="comment_confirmation">
+    <$mt:Var name="path_title" value="Confirmation..."$>
+    <$mt:Var name="page_title" value="Confirmation..."$>
+    <$mt:Var name="message" value="<p>Your comment has been submitted!</p>"$>
+<mt:Else name="comment_pending">
+    <$mt:Var name="path_title" value="Comment Posted"$>
+    <$mt:Var name="page_title" value="Thank you for commenting."$>
+    <$mt:Var name="message" value="<p>Your comment has been received and held for approval by the blog owner.</p>"$>
+<mt:Else name="comment_error">
+    <$mt:Var name="path_title" value="Comment Error"$>
+    <$mt:Var name="page_title" value="Comment Submission Error"$>
+    <mt:SetVarBlock name="message"><p>Your comment submission failed for the following reasons: <$mt:ErrorMessage$></p></mt:SetVarBlock>
+</mt:If>
+<mt:SetVarBlock name="title"><$mt:BlogName encode_html="1"$>: <$mt:Var name="page_title"$></mt:SetVarBlock>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<$MTBlogLanguage$>" lang="<$MTBlogLanguage$>">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=<$MTPublishCharset lower_case="1"$>" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <title><mt:var name="page_title"></title>
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="<$MTBlogURL$>themes/meta/css/master.css" />
+</head>
+<body class="comments-entry">
+    <MTSetVarBlock name="width" trim="1"><MTEntryAssets><MTAssetProperty property="image_width"></MTEntryAssets></MTSetVarBlock>
+    <MTSetVarBlock name="height" trim="1"><MTEntryAssets><MTAssetProperty property="image_height"></MTEntryAssets></MTSetVarBlock>
+    <div id="comment-photo">
+        <ul class="slides">
+            <li><a href="<$MTEntryLink$>"<mt:if name="height" gt="$width"> class="v"</mt:if> accesskey=","><$mt:include module="Photo Macro"$><mt:var name="photo" max_size="90"></a></li>
+        </ul>
+        <div id="desc">
+            <h1><$MTEntryTitle$></h1>
+            <p><em class="date"><$MTEntryDate language="en" format="%e %B %Y"$></em></p>
+        </div>
+    </div>
+    <div id="content">
+        <h2><mt:var name="page_title"></h2>
+        <$mt:Var name="message"$>
+    </div>
+    <p id="path"><a href="<$MTBlogURL$>"><$MTBlogName$></a>  &gt; <MTEntryCategories glue=" | "><a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/"><$MTCategoryLabel$></a> &gt; <a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/gallery/">Gallery</a></MTEntryCategories> &gt; <a href="<$MTEntryLink$>"><$MTEntryTitle escape="html"$></a> &gt; Comment Preview</p>
+<$MTInclude module="Document Footer"$>

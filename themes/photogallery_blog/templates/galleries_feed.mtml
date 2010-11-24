@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="<$MTPublishCharset lower_case="1"$>"?>
+<rss version="2.0">
+  <channel>
+    <title><$MTBlogName remove_html="1" encode_xml="1"$>: Galleries</title>
+    <link><$MTBlogURL$></link>
+    <description><$MTBlogDescription remove_html="1" encode_xml="1"$></description>
+    <copyright>Copyright <$MTDate format="%Y"$></copyright>
+    <lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+    <generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs> 
+<$MTInclude module="Photo Macro"$><MTCategories>
+<MTEntries lastn="1"><MTSetVarBlock name="category_date"><$MTEntryDate format="%Y%m%d%H%M%S"$><$MTCategoryID zero_pad="6"$></MTSetVarBlock></MTEntries>
+<MTSetVarBlock name="gallery_htmls{$category_date}">
+    <item>
+        <title><$MTCategoryLabel remove_html="1" encode_xml="1"$></title>
+        <description><MTUnless encode_xml="1"><p>(<em><$MTCategoryCount$>  photo<MTIf tag="CategoryCount" gt="1">s</MTIf></em>)<MTIf tag="CategoryDescription"> <$MTCategoryDescription remove_html="1"$><MTElse>No description</MTIf></p><p>Most recent photo from: <MTEntries lastn="1"><$MTEntryDate format="%e %B %Y"$></MTEntries></p><p><strong>Last <MTIf tag="CategoryCount" lt="5"><$MTCategoryCount$><MTElse>5</MTIf> photo<MTIf tag="CategoryCount" gt="1">s</MTIf>:</strong></p><p><MTEntries lastn="5" sort_order="descend"><a href="<$MTEntryLink$>"><$MTVar name="photo" max_size="90"$></a> </MTEntries></p><p><a href="<$MTCategoryArchiveLink$>">View gallery</a></p></MTUnless></description>
+        <link><$MTCategoryArchiveLink encode_xml="1"$></link>
+        <guid><$MTCategoryArchiveLink encode_xml="1"$></guid>
+        <category><MTUnless remove_html="1" encode_xml="1"><$MTCategoryCount$> photo<MTIf tag="CategoryCount" gt="1">s</MTIf></MTUnless></category>
+        <pubDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></pubDate>
+    </item>
+</MTSetVarBlock>
+</MTCategories>
+<MTLoop name="gallery_htmls" sort_by="key numeric reverse"><MTIf name="__counter__" le="10">
+<$MTVar name="__value__"$>
+</MTIf></MTLoop>
+  </channel>
+</rss>

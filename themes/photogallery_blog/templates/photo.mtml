@@ -1,0 +1,67 @@
+<MTSetVars>
+  section=photosolo
+  page_title=<$MTEntryTitle$>
+  entry_id=<$MTEntryID$>
+  primary_category=<$MTEntryCategory$>
+</MTSetVars>
+<$MTInclude module="Gallery Data"$>
+<$MTInclude module="Photo Macro"$>
+<mt:setvarblock name="header_append">  <$MTVar name="photo_css" max_size="480" ltrim="1"$></mt:setvarblock>
+<$MTInclude module="Document Header"$>
+<div id="content">
+
+    <div id="desc">
+        <h1><$MTEntryTitle$></h1>
+        <p><MTIf tag="MTEntryExcerpt"><$MTEntryExcerpt$><MTElse><em>No description</em></MTElse></MTIf></p>
+    </div>
+    <div id="main"<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> class="v"</MTIf>>
+        <p id="photo"><$MTVar name="photo" max_size="480" ltrim="1"$></p>
+        <div id="meta">
+            <ul>
+                <li class="count">Photo <MTEntries sort_order="ascend" category="$primary_category"><MTIf tag="EntryID" eq="$entry_id"><$MTVar name="__counter__"$></MTIf></MTEntries> of <MTEntryCategories><$MTCategoryCount$></MTEntryCategories></li>
+                <li class="date"><$MTEntryDate language="en" format="%x"$></li>
+<MTIf tag="MTEntryKeywords">
+                <li class="tags"><$MTEntryKeywords$></li>
+</MTIf>
+<MTEntryIfTagged>
+                <li class="tags"><MTEntryTags glue=","><$MTTagName$></MTEntryTags></li>
+</MTEntryIfTagged>
+            </ul>
+        </div>
+<MTIfCommentsAccepted>
+<!-- BEGIN #commentblock -->
+        <div id="commentblock">
+            <h2>
+                <$MTEntryCommentCount singular="1 Comment" plural="# Comments" none="No comments yet"$>
+<MTIf tag="EntryCommentCount">
+                <MTIfCommentsActive>&nbsp;so far</MTIfCommentsActive>
+                <a href="#comments" id="showcomments"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_show.gif" width="35" height="11" alt="SHOW" /></a>
+                <a href="#content" id="hidecomments"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_hide.gif" width="35" height="11" alt="HIDE" /></a>
+</MTIf>
+            </h2>
+            <$MTInclude module="Comment Block"$>
+        </div>
+<!-- END #commentblock -->
+</MTIfCommentsAccepted>
+    </div>
+
+<$MTInclude module="MTML Function"$>
+
+<MTIf name="prev_entry_id"><MTEntries id="$prev_entry_id">
+    <div id="prev" class="slides">
+        <p<MTIf tag="EntryKeywords"> class="<$MTEntryKeywords lower_case="1"$>"</MTIf>><a href="<$MTEntryLink$>"<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> class="v"</MTIf> accesskey="z"><$MTVar name="photo" max_size="90"$> <em>previous</em></a></p>
+    </div>
+</MTEntries></MTIf>
+<MTIf name="next_entry_id"><MTEntries id="$next_entry_id">
+    <div id="next" class="slides">
+        <p<MTIf tag="EntryKeywords"> class="<$MTEntryKeywords lower_case="1"$>"</MTIf>><a href="<$MTEntryLink$>"<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> class="v"</MTIf> accesskey="x"><$MTVar name="photo" max_size="90"$> <em>next</em></a></p>
+    </div>
+</MTEntries></MTIf>
+
+</div>
+
+<p id="path">
+    <a href="<$MTBlogURL$>"><$MTBlogName$></a>  &gt; <MTEntryCategories glue=" | "><a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/"><$MTCategoryLabel$></a> &gt; <a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/gallery/">Gallery</a></MTEntryCategories> &gt; <$MTEntryTitle$>
+</p>
+
+<$MTInclude module="Document Footer"$>

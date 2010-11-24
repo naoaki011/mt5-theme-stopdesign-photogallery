@@ -1,0 +1,70 @@
+<?php
+  // Page Variables
+  include ("../galleryinfo.php");
+  $pgtitle = "Favorites &gt; Gallery";
+  $section = "gallery";
+  $blogrelurl = "<$MTBlogRelativeURL$>";
+  $blogurl = "<$MTBlogURL$>";
+  $staticurl = "<$MTStaticWebPath$>";
+
+  // Functions
+  include ("<$MTBlogSitePath$>themes/meta/functions/all.php");
+  
+<$MTInclude module="Photo Macro"$>
+<MTEntries field:favorite="1" sort_order="ascend">
+  $imgs[] = Array(
+    "str" => '<MTVar name="photo" max_size="90" ltrim="1">',
+    "lnk" => '<$MTEntryLink relative_url="1"$>',
+    "tag" => '<$MTEntryKeywords lower_case="1"$>'
+    );
+</MTEntries>
+
+  $gallerycount = count($imgs);
+  
+  $gallerylimits = GalleryLimits($gallerycount);
+  extract($gallerylimits);
+
+  // Reverse array order if $displayorder set to "new" in cookie or POST variable:
+  if ($displayorder == "new") $imgs = array_reverse($imgs);
+
+  DocHead();
+  ContentOpen();
+?>
+
+  <div class="galleryinfo">
+    <h1>Favorites Gallery</h1>
+    <p class="desc">Favorites Photos Archive</p>
+  </div>
+
+<?php
+  echo "<ul class=\"slides\">\n";
+  if ($prevstart) {
+    echo '  <li class="backward"><a href="'.$prevstart.'">';
+    echo '<img alt="Previous page" title="Previous page" src="<$MTBlogRelativeURL$>themes/meta/img/moreslide_prev.gif" width="90" height="67" />';
+    echo "</a></li>\n";
+  }
+  for ($i = ($lolimit-1); $i < $hilimit; $i++) {
+    $item = '  <li';
+    if ($imgs[$i]['tag']) $item .= ' class="'.$imgs[$i]['tag'].'"';
+    $item .= '><a href="'.$imgs[$i]['lnk'].'"';
+    if (IsVertical($imgs[$i]['str'])) $item .= ' class="v"';
+    $item .= '>'.$imgs[$i]['str'].'</a></li>'."\n";
+    echo $item;
+  }
+  if ($nextstart) {
+    echo '  <li class="forward"><a href="'.$nextstart.'">';
+    echo '<img alt="Next page" title="Next page" src="<$MTBlogRelativeURL$>themes/meta/img/moreslide_next.gif" width="90" height="67" />';
+    echo "</a></li>\n";
+  }
+  echo "</ul>\n";
+?>
+
+    <div class="galleryinfo">
+      <p>Subscribe to updates: <a href="<$MTBlogURL$>feeds/favorites.xml" class="i"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></p>
+<?php GalleryNav($imgs) ?>
+    </div>
+
+  </div>
+  <p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName$></a> &gt; Favorites Gallery</p>  
+
+<$MTInclude module="Document Footer"$>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<$MTBlogLanguage$>" lang="<$MTBlogLanguage$>">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=<$MTPublishCharset lower_case="1"$>" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <title>Comment Preview: <$MTEntryTitle escape="html"$></title>
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="<$MTBlogURL$>themes/meta/css/master.css" />
+    <script type="text/javascript">var blogrelurl = "<$MTBlogRelativeURL$>";</script>
+    <script type="text/javascript" src="<mt:Link template="javascript">"></script>
+</head>
+<body class="comments-entry">
+<MTSetVarBlock name="width" trim="1"><MTEntryAssets><MTAssetProperty property="image_width"></MTEntryAssets></MTSetVarBlock>
+<MTSetVarBlock name="height" trim="1"><MTEntryAssets><MTAssetProperty property="image_height"></MTEntryAssets></MTSetVarBlock>
+    <div id="comment-photo">
+        <ul class="slides">
+            <li><a href="<$MTEntryLink$>" <mt:if name="height" gt="$width">class="v" </mt:if>accesskey=","><$mt:include module="Photo Macro"$><mt:var name="photo" max_size="90"></a></li>
+        </ul>
+        <div id="desc">
+            <h1><$MTEntryTitle$></h1>
+            <p><em class="date"><$MTEntryDate language="en" format="%e %B %Y"$></em></p>
+        </div>
+    </div>
+
+<!-- BEGIN #content -->
+    <div id="content">
+        <h2>Comment preview</h2>
+        <p class="sub">Use the &ldquo;Post&rdquo; button below to publish your comment.</p>
+        <dl class="commentlist">
+            <dt>
+                <span class="postno"><MTEntryCommentCount setvar="commentno" /><MTSetVar name="commentno" op="++" /><$MTVar name="commentno"$>.</span>
+                <em>On <$MTCommentPreviewDate language="en" format="%e %b %Y"$>, <$MTCommentPreviewAuthorLink$> wrote:</em>
+            </dt>
+            <dd><$MTCommentPreviewBody convert_breaks="1"$></dd>
+        </dl>
+        <h2>Edit or post your comment</h2>
+        <MTSetVar name="static" value="1" /><MTSetVar name="preview" value="1" /><$MTInclude module="Comment Fields"$>
+<MTComments>
+<MTCommentsHeader>
+        <h2>Previous comment<MTIf tag="EntryCommentCount" ne="1">s</MTIf></h2>
+        <dl class="commentlist">
+</MTCommentsHeader>
+            <dt id="comment<$MTCommentOrderNumber$>">
+                <a href="#comment<$MTCommentOrderNumber$>" class="postno" title="Link to Comment <$MTCommentOrderNumber$>"><$MTCommentOrderNumber$>.</a>
+                <em>On <$MTCommentDate language="en" format="%e %b %Y"$>, <$MTCommentAuthorLink$> wrote:</em>
+            </dt>
+            <dd><$MTCommentBody$></dd>
+<MTCommentsFooter>
+        </dl>
+</MTCommentsFooter>
+</MTComments>
+    </div>
+<!-- END #content -->
+
+    <p id="path"><a href="<$MTBlogURL$>"><$MTBlogName$></a>  &gt; <MTEntryCategories glue=" | "><a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/"><$MTCategoryLabel$></a> &gt; <a href="<$MTBlogURL$>galleries/<$MTCategoryBasename$>/gallery/">Gallery</a></MTEntryCategories> &gt; <a href="<$MTEntryLink$>"><$MTEntryTitle escape="html"$></a> &gt; <$MTVar name="path_title" escape="html"$></p>
+
+<$MTInclude module="Document Footer"$>

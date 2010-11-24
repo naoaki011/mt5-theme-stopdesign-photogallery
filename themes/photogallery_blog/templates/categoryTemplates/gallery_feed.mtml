@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="<$MTPublishCharset$>"?>
+<rss version="2.0">
+  <channel>
+    <title><$MTBlogName remove_html="1" encode_xml="1"$>: <$MTCategoryLabel remove_html="1" encode_xml="1"$></title>
+    <link><$MTBlogRelativeURL$><$MTCategoryBasename$>/</link>
+    <description><MTIf tag="CategoryDescription"><$MTCategoryDescription remove_html="1" encode_xml="1"$><MTElse>No description</MTElse></MTIf></description>
+    <copyright>Copyright <$MTDate format="%Y"$></copyright>
+    <lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+    <generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs> 
+<$MTInclude module="Photo Macro"$>
+<MTEntries lastn="15">
+    <item>
+        <title><$MTEntryTitle remove_html="1" encode_xml="1"$></title>
+        <description><MTUnless encode_xml="1"><p><a href="<$MTEntryLink$>"><$MTVar name="photo" max_size="240"$></a></p><p><MTIf tag="EntryExcerpt"><$MTEntryExcerpt$><MTElse>No description</MTIf></p></MTUnless></description>
+        <link><$MTEntryPermalink encode_xml="1"$></link>
+        <guid><$MTEntryPermalink encode_xml="1"$></guid>
+        <category><MTIf tag="EntryCategory"><MTEntryCategories glue=","><$MTCategoryLabel encode_xml="1"$></MTEntryCategories></MTIf></category>
+        <pubDate><$MTEntryDate format_name="rfc822"$></pubDate>
+    </item>
+</MTEntries>
+  </channel>
+</rss>

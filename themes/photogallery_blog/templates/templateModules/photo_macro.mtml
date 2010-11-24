@@ -1,0 +1,71 @@
+<mt:ignore>
+  This template module is responsible for outputing the associated image with the current
+  photo/entry in context. You can pass in the max_size parameter to control the size of 
+  the image.
+
+  Example:
+  <mt:Var name="photo" max_size="90">
+
+</mt:ignore>
+
+<MTSetVarTemplate name="photo"><MTUnless regex_replace="/\n+/g","">
+<MTEntryAssets>
+  <MTSetVarBlock name="width" trim="1"><MTAssetProperty property="image_width"></MTSetVarBlock>
+  <MTSetVarBlock name="height" trim="1"><MTAssetProperty property="image_height"></MTSetVarBlock>
+<mt:if name="width" gt="$height">
+  <MTSetVarBlock name="img"><mt:AssetThumbnailLink width="$max_size" sanitize="img src height width alt" /></MTSetVarBlock>
+<mt:else>
+  <MTSetVarBlock name="img"><mt:AssetThumbnailLink height="$max_size" sanitize="img src height width alt" /></MTSetVarBlock>
+</mt:if>
+</MTEntryAssets>
+<mt:var name="img" trim="1">
+</MTUnless></MTSetVarTemplate>
+
+<MTSetVarTemplate name="photo_css"><MTUnless regex_replace="/\n+/g","">
+<MTEntryAssets>
+  <MTSetVarBlock name="width" trim="1"><MTAssetProperty property="image_width"></MTSetVarBlock>
+  <MTSetVarBlock name="height" trim="1"><MTAssetProperty property="image_height"></MTSetVarBlock>
+  <MTSetVarBlock name="img_width"><mt:AssetThumbnailLink height="$max_size" sanitize="img width" regex_replace="/<img\swidth=\"(\d+)\"\s\/>/","$1" /></MTSetVarBlock>
+  <MTSetVar name="img_width" op="+" value="20" />
+  <MTVar name="img_width" op="-" value="500" setvar="img_margin" />
+  <MTSetVar name="img_margin" op="*" value="-0.5" />
+  <MTVar name="img_margin" regex_replace="/^([0-9]*)¥..*$/","$1" setvar="img_margin" />
+</MTEntryAssets>
+<mt:if name="width" lt="$height">
+<style type="text/css">
+.v p#photo {
+  width:<$MTVar name="img_width"$>px;
+  margin-left:<$MTVar name="img_margin"$>px;
+  margin-right:<$MTVar name="img_margin"$>px;
+  }
+</style>
+</mt:if>
+</MTUnless></MTSetVarTemplate>
+
+<MTSetVarTemplate name="title_img_css"><MTUnless regex_replace="/\n+/g","">
+<MTEntryAssets>
+  <MTSetVarBlock name="width" trim="1"><MTAssetProperty property="image_width"></MTSetVarBlock>
+  <MTSetVarBlock name="height" trim="1"><MTAssetProperty property="image_height"></MTSetVarBlock>
+  <MTSetVarBlock name="img_width"><mt:AssetThumbnailLink height="$max_size" sanitize="img width" regex_replace="/<img\swidth=\"(\d+)\"\s\/>/","$1" /></MTSetVarBlock>
+  <MTSetVar name="img_width" op="+" value="20" />
+  <MTVar name="img_width" op="-" value="713" setvar="text_width" />
+  <MTSetVar name="text_width" op="*" value="-1" />
+</MTEntryAssets>
+<mt:if name="width" lt="$height">
+<style type="text/css">
+.auto .v #titleimg {
+  width:<$MTVar name="img_width"$>px;
+}
+.v #gallerydesc {
+  width:<$MTVar name="text_width"$>px;
+}
+</style>
+</mt:if>
+</MTUnless></MTSetVarTemplate>
+
+<MTSetVarTemplate name="isV"><MTUnless regex_replace="/\n+/g","">
+<MTEntryAssets>
+  <MTSetVarBlock name="width" trim="1"><MTAssetProperty property="image_width"></MTSetVarBlock>
+  <MTSetVarBlock name="height" trim="1"><MTAssetProperty property="image_height"></MTSetVarBlock>
+</MTEntryAssets>
+</MTUnless></MTSetVarTemplate>

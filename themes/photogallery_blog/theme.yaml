@@ -1,0 +1,206 @@
+--- 
+id: photogallery_blog
+label: Stop Design Photo Gallery
+name: Stop Design Photo Gallery
+version: 3.0
+author_link: http://code.zelazny.mydns.jp/
+author_name: oscar
+class: blog
+description: <__trans phrase="ReMake Templates for Stop Design Photo Gallery (PHP)">
+required_components: 
+  commercial: 1.50
+l10n_lexicon:
+  ja: l10n_ja.yaml
+thumbnail_file: photogallery.png
+thumbnail_file_medium: photogallery-medium.png
+thumbnail_file_small: photogallery-small.png
+elements: 
+  default_pages:
+    component: core
+    importer: default_pages
+    name: Default Pages
+    data:
+      index:
+        basename: anout
+        title: About
+        tags: @about
+  blog_static_files: 
+    component: core
+    importer: blog_static_files
+    data: 
+      - themes
+  default_prefs:
+    component: core
+    importer: default_prefs
+    require: 1
+    data:
+      allow_comment_html: 1
+      allow_commenter_regist: 1
+      allow_comments_default: 1
+      allow_pings: 0
+      allow_pings_default: 0
+      allow_reg_comments: 1
+      allow_unreg_comments: 1
+      archive_type_preferred: Individual
+      autodiscover_links: 0
+      autolink_urls: 0
+      basename_limit: 100
+      convert_paras: 0
+      convert_paras_comments: __default__
+      email_new_comments: 1
+      email_new_pings: 1
+      entries_on_index: 10
+      file_extension: php
+      follow_auth_links: ~
+      internal_autodiscovery: 0
+      junk_folder_expiry: 14
+      junk_score_threshold: 0
+      language: ja
+      moderate_pings: 1
+      moderate_unreg_comments: 1
+      nofollow_urls: ~
+      require_comment_emails: 1
+      sanitize_spec: 0
+      sort_order_comments: descend
+      sort_order_posts: ascend
+      status_default: 2
+      use_comment_confirmation: 0
+      use_revision: 1
+      words_in_excerpt: 40
+  custom_fields: 
+    component: commercial
+    importer: custom_fields
+    data: 
+      favorite: 
+        default: 0
+        description: Favorites Photos
+        name: Favorite
+        obj_type: entry
+        options: ~
+        required: 0
+        tag: EntryDataFavorite
+        type: checkbox
+      title_image: 
+        default: 0
+        description: TitleImage of Gallery
+        name: TitleImage
+        obj_type: entry
+        options: ~
+        required: 0
+        tag: GalleryTitleImage
+        type: checkbox
+  template_set: 
+    component: core
+    importer: template_set
+    data: 
+      base_path: templates
+      label: Stop Design Photo Gallery Theme
+      templates: 
+        archive: 
+          gallery: 
+            label: Photo Gallery
+            mappings: 
+              category: 
+                archive_type: Category
+                file_template: galleries/<$MTCategoryBasename$>/gallery/index.php
+                filename: categoryTemplates/gallery.mtml
+                preferred: 1
+          gallery_feed: 
+            label: Photo Gallery (RSS)
+            mappings: 
+              category: 
+                archive_type: Category
+                file_template: feeds/<$MTCategoryBasename$>.xml
+                filename: categoryTemplates/gallery_feed.mtml
+                preferred: 0
+          gallery_info: 
+            label: Gallery Info
+            mappings: 
+              category: 
+                archive_type: Category
+                file_template: galleries/<$MTCategoryBasename$>/galleryinfo.php
+                filename: categoryTemplates/gallery_info.mtml
+                preferred: 0
+          gallery_title: 
+            label: Gallery Title
+            mappings: 
+              category: 
+                archive_type: Category
+                file_template: galleries/<$MTCategoryBasename$>/index.php
+                filename: categoryTemplates/gallery_title.mtml
+                preferred: 0
+        index: 
+          comments_feed: 
+            label: Recent Comments (RSS)
+            outfile: feeds/comments.xml
+            rebuild_me: 1
+          comments_index: 
+            label: Recent Comments
+            outfile: comments/index.php
+            rebuild_me: 1
+          favorites_archive: 
+            label: Favorites Archive
+            outfile: favorites/index.php
+            rebuild_me: 1
+          favorites_feed: 
+            label: Favorites Archive (RSS)
+            outfile: feeds/favorites.xml
+            rebuild_me: 1
+          galleries_feed: 
+            label: Gallery Archive (RSS)
+            outfile: feeds/galleries.xml
+            rebuild_me: 1
+          galleries_index: 
+            label: Gallery Archive
+            outfile: galleries/index.php
+            rebuild_me: 1
+          javascript: 
+            label: Site Javascript
+            outfile: js/mt.js
+            rebuild_me: 1
+          main_index: 
+            label: Gallery Index
+            outfile: index.php
+            rebuild_me: 1
+          photos_feed: 
+            label: Recent Photos (RSS)
+            outfile: feeds/index.xml
+            rebuild_me: 1
+        individual: 
+          photo: 
+            label: Individual Photo
+            mappings: 
+              individual: 
+                archive_type: Individual
+                file_template: galleries/<MTEntryCategory setvar="primary_category" /><MTEntryCategories><MTIf tag="CategoryLabel" eq="$primary_category"><$MTCategoryBasename$></MTIf></MTEntryCategories><MTIf tag="EntryCategory">/</MTIf>gallery/<$MTEntryBasename$>.php
+                preferred: 1
+        module: 
+          comment_block: 
+            label: Comment Block
+            filename: templateModules/comment_block.mtml
+          comment_fields: 
+            label: Comment Fields
+            filename: templateModules/comment_fields.mtml
+          document_footer: 
+            label: Document Footer
+            filename: templateModules/document_footer.mtml
+          document_header: 
+            label: Document Header
+            filename: templateModules/document_header.mtml
+          gallery_data: 
+            label: Gallery Data
+            filename: templateModules/gallery_data.mtml
+          mtml_function: 
+            label: MTML Function
+            filename: templateModules/mtml_function.mtml
+          photo_macro: 
+            label: Photo Macro
+            filename: templateModules/photo_macro.mtml
+
+        system: 
+          comment_preview: 
+            label: Comment Preview
+            filename: systemTemplates/comment_preview.mtml
+          comment_response: 
+            label: Comment Posted
+            filename: systemTemplates/comment_response.mtml

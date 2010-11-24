@@ -1,0 +1,83 @@
+<MTIfCommentsModerated>
+<p class="comments-open-moderated">(If you haven't left a comment here before, you may need to be approved by the site owner before your comment will appear. Until then, it won't appear on the entry. Thanks for waiting.)</p>
+</MTIfCommentsModerated>
+
+<div class="comments-open" id="comments-open">
+    <h2 class="comments-open-header">Leave a comment</h2>
+    <div class="comments-open-content">
+
+        <div id="comment-greeting"></div>
+
+        <form method="post" action="<$mt:CGIPath$><$mt:CommentScript$>" id="comments-form" onsubmit="return mtCommentOnSubmit(this)">
+
+            <div>
+                    <input type="hidden" name="static" value="1" />
+                    <input type="hidden" name="entry_id" value="<$mt:EntryID$>" />
+                    <input type="hidden" name="__lang" value="<$mt:BlogLanguage$>" />
+                    <input type="hidden" name="parent_id" value="<$mt:CommentParentID$>" id="comment-parent-id" />
+                    <input type="hidden" name="armor" value="1" />
+                    <input type="hidden" name="preview" value="" />
+                    <input type="hidden" name="sid" value="" />
+            </div>
+            <p id="comment-form-reply" style="display:none">
+                <input type="checkbox" id="comment-reply" name="comment_reply" value="<$mt:CommentParentID$>"<mt:IfCommentParent> checked="checked"</mt:IfCommentParent> onclick="mtSetCommentParentID()" />
+                <label for="comment-reply" id="comment-reply-label"><mt:IfCommentParent>Replying to comment from <mt:CommentParent><$mt:CommentAuthor$></mt:CommentParent></mt:IfCommentParent></label>
+            </p>
+
+            <table cellspacing="0">
+                <tr valign="top" align="left" id="comment-form-name">
+                    <th><label for="comment-author">Name:</label></th>
+                    <td><input tabindex="1" id="comment-author" name="author" class="text" value="<MTIf name="preview" eq="1"><$mt:CommentAuthor encode_html="1"$></MTIf>" onfocus="mtCommentFormOnFocus()" /></td>
+                </tr>
+                <tr valign="top" align="left" id="comment-form-email">
+                    <th><label for="comment-email">Email:</label></th>
+                    <td><input tabindex="2" id="comment-email" name="email" class="text" value="<MTIf name="preview" eq="1"><$mt:CommentEmail encode_html="1"$></MTIf>" onfocus="mtCommentFormOnFocus()" /> <em>(not displayed)</em></td>
+                </tr>
+                <tr valign="top" align="left" id="comment-form-url">
+                    <th><label for="comment-url">URL:</label></th>
+                    <td><input tabindex="3" type="text" name="url" id="comment-url" class="text" value="<MTIf name="preview" eq="1"><$mt:CommentURL encode_html="1"$></MTIf>" onfocus="mtCommentFormOnFocus()" /></td>
+                </tr>
+                <tr valign="top" align="left" id="comment-form-remember-me">
+                    <th>remember me?</th>
+                    <td>
+                        <input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="mtRememberMeOnClick(this)" value="1" accesskey="r" />
+                        <label for="comment-bake-cookie">Yes&nbsp;(store data in browser cookie.)</label>
+                    </td>
+                </tr>
+                <tr valign="top" align="left" id="comment-open-text">
+                    <th><label for="comment-text">Comment: <mt:IfAllowCommentHTML><br />(You may use HTML tags for style)</mt:IfAllowCommentHTML></label></th>
+                    <td>
+                        <textarea id="comment-text" name="text" rows="10" cols="40" onfocus="mtCommentFormOnFocus()"><mt:If name="comment_preview"><$mt:CommentBody autolink="0" sanitize="0" convert_breaks="0" escape="html"$></mt:If></textarea>
+                    </td>
+                </tr>
+<MTIf tag="CaptchaFields">
+                <tr valign="top" align="left" id="comment-open-captcha">
+                    <th>&nbsp;</th>
+                    <td>
+                        <div id="comments-open-captcha"></div>
+                    </td>
+                </tr>
+</MTIf>
+                <tr valign="top" align="left" id="comment-open-footer">
+                    <th class="buttons">&nbsp;</th>
+                    <td class="buttons">
+                        <input type="submit" value="Preview" id="btn-preview" name="preview_button" tabindex="5" accesskey="v" onclick="this.form.preview.value='1';" /> 
+<mt:If name="comment_preview">
+                        <input type="button" value="Cancel" id="btn-cancel" name="cancel" onclick="window.location='<$mt:EntryPermalink$>'" />
+</mt:If>
+                        <input type="submit" value="Post" id="btn-post" name="post" tabindex="6" accesskey="s" />
+                        <p>Avoid clicking &ldquo;Post&rdquo; more than once.</p>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+</div>
+<script type="text/javascript">
+    <!--
+    mtAttachEvent("load", mtEntryOnLoad);
+    mtAttachEvent("unload", mtEntryOnUnload);
+    //-->
+</script>

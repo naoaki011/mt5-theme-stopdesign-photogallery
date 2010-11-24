@@ -1,0 +1,32 @@
+<MTSetVars>
+  page_title=<$MTCategoryLabel$>
+  section=title_auto
+</MTSetVars>
+<$MTInclude module="Gallery Data"$>
+<$MTInclude module="Photo Macro"$>
+<mt:setvarblock name="header_append"><MTEntries lastn="1">  <$MTVar name="title_img_css" max_size="480" ltrim="1"$></MTEntries></mt:setvarblock>
+<$MTInclude module="Document Header"$>
+<MTEntries lastn="1">
+  <div id="content"<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> class="v"</MTIf>>
+
+    <div id="titleimg">
+      <div id="titleimg-inner">
+        <a href="gallery/"><$MTVar name="photo" max_size="480"$></a>
+      </div>
+    </div>
+    <div id="gallerydesc">
+      <h1><$MTCategoryLabel$></h1>
+      <p><MTIf tag="CategoryDescription"><$MTCategoryDescription$><MTElse><em>No description</em></MTIf></p>
+      <p>Updated: <$MTEntryDate language="en" format="%B %Y"$></p>
+      <p>(<em><$MTCategoryCount$> photos</em>)
+        <a href="<$MTBlogURL$>feeds/<$MTCategoryBasename$>.xml" class="i"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a>
+      </p>
+      <p><a href="gallery/" class="i"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_view_gallery.gif" alt="View gallery" width="97" height="21" /></a></p>
+    </div>
+
+</MTEntries>
+
+  </div>
+  <p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName$></a> > <$MTCategoryLabel$></p>  
+
+<$MTInclude module="Document Footer"$>

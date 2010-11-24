@@ -1,0 +1,39 @@
+<MTSetVars>
+  page_title=Recent Comments
+  section=recentcomments
+</MTSetVars><$MTInclude module="Document Header"$><$MTInclude module="Gallery Data"$><$MTInclude module="Photo Macro"$>
+
+    <div id="content">
+        <h1>Recent Comments</h1>
+<MTIf tag="BlogCommentCount">
+<MTComments lastn="15">
+<MTCommentsHeader>
+        <ul class="commentlist">
+</MTCommentsHeader>
+            <li>
+                <MTCommentEntry><p class="slides<MTIf tag="EntryKeywords"> <$MTEntryKeywords lower_case="1"$></MTIf>"><a href="<$MTEntryLink$>" class="image<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> v</MTIf>"><$MTVar name="photo" max_size="90"$></a></p></MTCommentEntry>
+                <p class="commenter">On <$MTCommentDate language="en" format="%e %b %Y"$>, <$MTCommentAuthorLink$> <a href="<MTCommentEntry><$MTEntryLink$></MTCommentEntry>>#comment-<$MTCommentID$>">wrote</a>:</p>
+                <$MTCommentBody$>
+                <MTCommentEntry><p class="commenton">From: <a href="<$MTEntryLink$>"><$MTEntryTitle$></a> <em>(<MTEntryCategories glue=","><$MTCategoryLabel$></MTEntryCategories>)</em></p></MTCommentEntry>
+            </li>
+<MTCommentsFooter>
+        </ul>
+</MTCommentsFooter>
+</MTComments>
+<MTElse>
+        <p>No comments yet.</p>
+</MTIf>
+
+        <div id="feeds">
+            <h2>Global Feeds</h2>
+            <ul>
+                <li><a href="<$MTBlogURL$>feeds/galleries.xml" title="RSS feed for recent galleries"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Galleries</a></li>
+                <li><a href="<$MTBlogURL$>feeds/index.xml" title="RSS feed for recent photos"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Photos</a></li>
+                <li><a href="<$MTBlogURL$>feeds/comments.xml" title="RSS feed for recent comments"><img src="<$MTBlogRelativeURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /> Comments</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <p id="path"><a href="<$MTBlogRelativeURL$>"><$MTBlogName$></a> &gt; Recent Comments</p>
+
+<$MTInclude module="Document Footer"$>

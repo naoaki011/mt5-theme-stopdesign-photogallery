@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="<$MTPublishCharset$>"?>
+<rss version="2.0">
+<channel>
+<title><$MTBlogName remove_html="1" encode_xml="1"$>: Comments</title>
+<link><$MTBlogURL$></link>
+<description><$MTBlogDescription remove_html="1" encode_xml="1"$></description>
+<copyright>Copyright <$MTDate format="%Y"$></copyright>
+<lastBuildDate><MTEntries lastn="1"><$MTEntryDate format_name="rfc822"$></MTEntries></lastBuildDate>
+<generator>http://www.movabletype.org/?v=<$MTVersion$></generator>
+<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+<$MTInclude module="Photo Macro"$><MTComments lastn="15">
+<item>
+<title><MTCommentEntry><$MTEntryTitle remove_html="1" encode_xml="1"$></MTCommentEntry></title>
+<description><MTUnless encode_xml="1"><MTCommentEntry><p><a href="<$MTEntryPermalink$>"><$MTVar name="photo" max_size="90"$></a></p></MTCommentEntry><cite><$MTCommentAuthor$></cite> wrote: <$MTCommentBody$></MTUnless></description>
+<link><MTUnless encode_xml="1"><MTCommentEntry><$MTEntryLink$></MTCommentEntry>#comment-<$MTCommentID$></MTUnless></link>
+<guid><MTUnless encode_xml="1"><MTCommentEntry><$MTEntryLink$></MTCommentEntry>#ciomment-<$MTCommentID$></MTUnless></guid>
+<category><MTCommentEntry><MTEntryCategories glue=","><$MTCategoryLabel remove_html="1" encode_xml="1"$></MTEntryCategories></MTCommentEntry></category>
+<pubDate><$MTCommentDate format_name="rfc822"$></pubDate>
+</item>
+</MTComments>
+</channel>
+</rss>

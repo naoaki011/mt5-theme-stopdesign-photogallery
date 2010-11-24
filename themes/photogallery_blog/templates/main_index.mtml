@@ -1,0 +1,115 @@
+<MTSetVars>
+  page_title=<$MTBlogName$>
+  section=index
+</MTSetVars><$MTInclude module="Document Header"$><$MTInclude module="Gallery Data"$><$MTInclude module="Photo Macro"$>
+
+  <div id="content">
+  <h1>Gallery Index</h1>
+
+  <div class="galleries useslides">
+    <h2>Recently Updated Galleries</h2>
+
+<MTCategories>
+<MTIf tag="CategoryCount">
+<MTEntries lastn="1"><MTEntryDate format="%Y%m%d%H%M%S" setvar="cat_key" /></MTEntries>
+<MTSetVarBlock name="gallery_html{$cat_key}">
+        <h3><a href="<$MTCategoryArchiveLink$>"><$MTCategoryLabel$></a></h3>
+        <a href="<$MTCategoryArchiveLink$>" class="img<MTEntries lastn="1"><$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"> v</MTIf></MTEntries>"><MTEntries lastn="1"><$MTVar name="photo" max_size="90"$></MTEntries></a>
+        <p><em>(<$MTCategoryCount$> photos)</em> <$MTCategoryDescription$></p>
+        <p><MTEntries lastn="1"><$MTEntryDate language="en" format="%b %Y"$></MTEntries></p>
+</MTSetVarBlock>
+</MTIf>
+</MTCategories>
+
+<MTLoop name="gallery_html" sort_by="key reverse">
+<MTIf name="__counter__" gt="6">
+<MTSetVar name="gallery_html" key="$__key__" function="delete" />
+</MTIf>
+</MTLoop>
+
+<MTIf name="galleryno">
+<MTLoop name="gallery_html" sort_by="key reverse">
+<MTIf name="__counter__" op="mod" value="3" eq="1">
+    <ul>
+ </MTIf>
+      <li>
+        <$MTVar name="__value__"$>
+      </li>
+<MTIf name="__counter__" op="mod" value="3" eq="0">
+    </ul>
+</MTIf>
+<MTIf name="__last__"><MTVar name="__counter__" setvar="counter"></MTIf>
+</MTLoop>
+<MTIf name="counter" op="mod" value="3" ne="0">
+    </ul>
+</MTIf>
+    <p class="mainbutton"><a href="<$MTBlogRelativeURL$>galleries/" class="btn"><img src="<$MTBlogURL$>themes/meta/img/btn_gallery_archive.gif" width="118" height="21" alt="Gallery Archive" /></a></p>
+<MTElse>
+    <p>No galleries published yet.</p>
+</MTIf>
+  </div>
+
+  <div id="secondary">
+    <div class="module">
+
+      <h2>Description</h2><MTIf tag="BlogDescription">
+      <p><$MTBlogDescription$></p><MTElse>
+      <p>You&#8217;re viewing a set of galleries featuring the photos I have taken recently.</p>
+      <p>The Movable Type <a href="http://stopdesign.com/templates/photos/">templates</a> that build these pages are available for anyone to download and use.</p>
+</MTIf>
+
+    </div>
+    <div class="module">
+
+      <h2>Favorites</h2>
+<MTEntries field:favorite="1">
+<MTEntriesHeader>      <ul id="favlist">
+</MTEntriesHeader>
+<MTIf name="__counter__" le="6">
+        <li><a href="<$MTEntryLink$>" class="fav<$MTVar name="isV" trim="1"$><MTIf name="height" gt="$width"$> v</MTIf>"><$MTVar name="photo" max_size="46"$></a></li>
+<MTElse><MTSetVarBlock name="fav_link">
+      <p class="mainbutton"><a href="<$MTBlogArchiveURL$>favorites/" class="btn"><img src="<$MTBlogURL$>themes/meta/img/btn_all_favorites.gif" width="100" height="21" alt="All Favorites" /></a></p>
+</MTSetVarBlock></MTIf><MTEntriesFooter>      </ul>
+<MTSetVar name="favcount" value="$__counter__" /></MTEntriesFooter><MTElse>
+      <p>No favorites selected yet.</p>
+</MTEntries>
+      <$MTVar name="fav_link"$>
+
+    </div>
+    <div class="module">
+
+      <h2>Gallery data</h2>
+      <table cellspacing="0" class="gallerydata">
+        <tr>
+          <th><a href="<$MTBlogURL$>galleries/">Galleries</a></th>
+          <td><$MTVar name="galleryno"$></td>
+          <td><a href="<$MTBlogURL$>feeds/galleries.xml" title="RSS feed for recent galleries" class="i"><img src="<$MTBlogURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+        </tr>
+        <tr>
+          <th>Photos</th>
+          <td><$MTVar name="totalphotos"$></td>
+          <td><a href="<$MTBlogURL$>feeds/index.xml" title="RSS feed for recent photos" class="i"><img src="<$MTBlogURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+        </tr>
+<MTIf tag="BlogCommentCount">
+        <tr>
+          <th><a href="<$MTBlogURL$>comments/">Comments</a></th>
+          <td><$MTBlogCommentCount$></td>
+          <td><a href="<$MTBlogURL$>feeds/comments.xml" title="RSS feed for recent comments" class="i"><img src="<$MTBlogURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+        </tr>
+</MTIf>
+<MTIf name="favcount">
+        <tr>
+          <th><a href="<$MTBlogArchiveURL$>favorites/">Favorites</a></th>
+          <td><$MTVar name="favcount"$></td>
+          <td><a href="<$MTBlogArchiveURL$>feeds/favorites.xml" title="RSS feed for favorite photos" class="i"><img src="<$MTBlogURL$>themes/meta/img/btn_rss.gif" alt="RSS" width="22" height="11" /></a></td>
+        </tr>
+</MTIf>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+<p id="path"><$MTBlogName$></p>
+
+<$MTInclude module="Document Footer"$>

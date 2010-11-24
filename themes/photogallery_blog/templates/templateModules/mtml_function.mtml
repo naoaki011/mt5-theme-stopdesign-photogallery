@@ -1,0 +1,36 @@
+<MTIf tag="EntryCategory">
+    <MTEntryCategory setvar="entry_category" />
+    <MTEntryID setvar="cur_entry_id" />
+    <MTSetVar name="entry_count" value="0" />
+
+    <MTEntries category="$entry_category" sort_order="ascend">
+        <MTSetVar name="entry_count" op="++" />
+        <MTEntryID setvar="entry_id" />
+        <MTSetVar name="orders[$entry_id]" value="$entry_count" />
+        <MTSetVar name="entry_ids[$entry_count]" value="$entry_id" />
+    </MTEntries>
+
+    <MTIf name="entry_count">
+        <MTVar name="orders[$cur_entry_id]" setvar="this_order" />
+
+        <MTIf name="this_order" eq="$entry_count">
+            <MTSetVar name="next_entry_id" value="0">
+        <MTElse>
+            <MTVar name="this_order" op="++" setvar="next_order" />
+            <MTVar name="entry_ids[$next_order]" setvar="next_entry_id">
+        </MTIf>
+
+        <MTIf name="this_order" eq="1">
+            <MTSetVar name="prev_entry_id" value="0">
+        <MTElse>
+            <MTVar name="this_order" op="--" setvar="prev_order" />
+            <MTVar name="entry_ids[$prev_order]" setvar="prev_entry_id">
+        </MTIf>
+
+    </MTIf>
+
+<MTIgnore>
+<MTEntries id="$next_entry_id">Do Sometjing</MTEntries>
+</MTIgnore>
+</MTIf>
+
